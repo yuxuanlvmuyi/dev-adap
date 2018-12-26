@@ -31,8 +31,8 @@ export let SendEmail = {
 }
 
 export let smartContract = {
-  developerAddress : 'TXsYEg41yPQKzpYBM1gwWNvpTEoGUtExTu', // 开发者账户地址
-  developerPrivateKey : '8EBE01BA3E1E74ED6A0BCD4C3320D0B9D3EB20B173DB190563EB90AAD0405523', // 开发者私钥
+  developerAddress : '', // 开发者账户地址
+  developerPrivateKey : '', // 开发者私钥
   assistantAddress : 'TXsYEg41yPQKzpYBM1gwWNvpTEoGUtExTu', // assistant账户地址
   fullNodeUrl : 'http://47.90.240.201:8090',
   solidityNodeUrl : 'http://47.90.240.201:8091',
