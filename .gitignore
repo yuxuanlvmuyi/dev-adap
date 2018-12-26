@@ -1,6 +1,6 @@
 .DS_STORE
 logs
-#node_modules
+node_modules
 dist
 output
 coverage
