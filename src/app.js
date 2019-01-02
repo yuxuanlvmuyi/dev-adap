@@ -10,12 +10,22 @@ import ErrorRoutesCatch from './middleware/ErrorRoutesCatch'
 import ErrorRoutes from './routes/error-routes'
 import jwt from 'koa-jwt'
 import fs from 'fs'
+import redisUtils from './tool/redis.js'
+import './tasks/webSocket.js'
+import './tasks/smartContract.js'
+// import './db/smartContract.js'
 // import PluginLoader from './lib/PluginLoader'
 
-const app = new Koa2()
+const WebSocket = require("koa-websocket");
+const Koa = new Koa2()
+let app = WebSocket(Koa);
+
 const env = process.env.NODE_ENV || 'development' // Current mode
 
 const publicKey = fs.readFileSync(path.join(__dirname, '../publicKey.pub'))
+
+let ctxs = [];
+global.ws = [];
 
 app
   .use((ctx, next) => {
@@ -47,6 +57,8 @@ app
   .use(MainRoutes.allowedMethods())
   .use(ErrorRoutes())
 
+
+
 if (env === 'development') { // logger
   app.use((ctx, next) => {
     const start = new Date()
@@ -56,6 +68,26 @@ if (env === 'development') { // logger
     })
   })
 }
+
+/* 实现简单的接发消息 */
+app.ws.use((ctx, next) => {
+    /* 每打开一个连接就往 上线文数组中 添加一个上下文 */
+    ctxs.push(ctx);
+    global.ws.push(ctx);
+    ctx.websocket.on("message", (message) => {
+        console.log(message);
+        for(let i = 0; i < ctxs.length; i++) {
+            if (ctx == ctxs[i]) continue;
+            ctxs[i].websocket.send(message);
+        }
+    });
+    ctx.websocket.on("close", (message) => {
+        console.log('close:', message)
+        /* 连接关闭时, 清理 上下文数组, 防止报错 */
+        let index = ctxs.indexOf(ctx);
+        ctxs.splice(index, 1);
+    });
+});
 
 app.listen(SystemConfig.API_server_port)
 

@@ -1,5 +1,12 @@
-import { doBuy, status, gettransactioninfobyid, } from '../services/smartContract.js'
+import { doBuy, status, gettransactioninfobyid, queryAssistantInfo, queryPrice, commitDeposit, commitHash,
+         roundLucky, doRefund, doLucky, queryRound, sendBonusAndFee, } from '../services/smartContract.js'
 const TronWeb = require('tronweb')
+var redis = require('redis')
+import {Redis} from '../config.js'
+import { getByte32 } from '../tool/Common.js'
+import dbUtils from '../db/smartContract.js'
+
+const web3 = require("web3");
 
 export let Get = (ctx) => {
   console.log('dasdasd');
@@ -37,7 +44,24 @@ export let Delect = (ctx) => {
 export async function Test (ctx) {
   // var res = await doBuy();
   // var res = await status();
-  var res = await gettransactioninfobyid();
+  // var res = await gettransactioninfobyid();
+  // var res = await queryAssistantInfo();
+  // var res = await price();
+  // var res = await commitHash();
+  // var res = await commitDeposit(10166 * 1000000);
+  // var res = await doLucky(getByte32())
+  // var res = await doRefund();
+  // var res = await doLucky();
+  // var res = await queryRound();
+  // var res = await sendBonusAndFee('0x16');
+
+  var res = await dbUtils.getTodayBetList();
+  
+  
+  console.log("res:", res)
+  // var res = await callback.then(function(re) {
+  //   return re
+  // })
   ctx.body = res;
   // console.log('')
   // const HttpProvider = TronWeb.providers.HttpProvider;

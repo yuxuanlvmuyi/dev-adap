@@ -14,6 +14,12 @@ export let System = {
   db_type: 'mysql' // 数据库类型
 }
 
+export let Redis = {
+  host: '127.0.0.1', // 服务器地址
+  port: '6379', // 端口号
+  pwd: '123456', // 设置项
+}
+
 export let DB = {
   host: 'localhost', // 服务器地址
   port: 3306, // 数据库端口号
@@ -31,11 +37,45 @@ export let SendEmail = {
 }
 
 export let smartContract = {
-  developerAddress : '', // 开发者账户地址
-  developerPrivateKey : '', // 开发者私钥
-  assistantAddress : 'TXsYEg41yPQKzpYBM1gwWNvpTEoGUtExTu', // assistant账户地址
+  developerAddress : 'TTVVtovFaTpLBQ5fHfcDWN8hxzPjGpW3ef', // 开发者账户地址
+  developerPrivateKey : 'FB0836516A9B6E2502A971A8175CA9986BB755A68609086BE291C1969FDBB441', // 开发者私钥
+  assistantPrivateKey : 'FB0836516A9B6E2502A971A8175CA9986BB755A68609086BE291C1969FDBB441', // assistant私钥
   fullNodeUrl : 'http://47.90.240.201:8090',
   solidityNodeUrl : 'http://47.90.240.201:8091',
   eventServerUrl : 'http://47.90.240.201:8092',
-  contractAddress : '41f04053ec8484e978e894c414b6caafc57917802f',
+  contractHexAddress : '412c68606d590aeebdb56b09bc3d55bf11672e53be',
+  contractBase58Address : 'TE21miaHFLdgXYaNF4dinLxKJFumQn2yvC',
+  assistantHexAddress : '412c68606d590aeebdb56b09bc3d55bf11672e53be',
+  assistantBase58Address : 'TE21miaHFLdgXYaNF4dinLxKJFumQn2yvC',
 }
+
+export let isDev = true
+
+export let env = 'dev'
+
+export let RedisKeys = {
+  'SMART_CONTRACT_STATUS' : 'SMART_CONTRACT_STATUS', // 智能合约返回的状态值
+  'SMART_CONTRACT_PRICE' : 'SMART_CONTRACT_PRICE',   // 智能合约返回的商品价格
+  'SMART_CONTRACT_HASH' : 'SMART_CONTRACT_HASH',   // 智能合约返回的商品价格
+  'SMART_CONTRACT_MIN'  :  'SMART_CONTRACT_MIN',    // 要传给智能合约的明文
+  'SMART_CONTRACT_ROUND' : 'SMART_CONTRACT_ROUND', // 轮次
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
