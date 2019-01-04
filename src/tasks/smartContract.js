@@ -181,7 +181,7 @@ async function mainTask(){
     setTimeout(mainTask, 1000);
 }
 
-mainTask()
+// mainTask()
 
 // 得到交易结果数据
 function getConstantResult(res) {

@@ -24,7 +24,6 @@ const env = process.env.NODE_ENV || 'development' // Current mode
 
 const publicKey = fs.readFileSync(path.join(__dirname, '../publicKey.pub'))
 
-let ctxs = [];
 global.ws = [];
 
 app
@@ -73,20 +72,21 @@ if (env === 'development') { // logger
 /* 实现简单的接发消息 */
 app.ws.use((ctx, next) => {
     /* 每打开一个连接就往 上线文数组中 添加一个上下文 */
-    ctxs.push(ctx);
     global.ws.push(ctx);
     ctx.websocket.on("message", (message) => {
         console.log(message);
-        for(let i = 0; i < ctxs.length; i++) {
-            if (ctx == ctxs[i]) continue;
-            ctxs[i].websocket.send(message);
+        for(let i = 0; i < global.ws.length; i++) {
+            if (ctx == global.ws[i]) continue;
+            global.ws[i].websocket.send(message);
         }
     });
     ctx.websocket.on("close", (message) => {
         console.log('close:', message)
         /* 连接关闭时, 清理 上下文数组, 防止报错 */
-        let index = ctxs.indexOf(ctx);
-        ctxs.splice(index, 1);
+        let index = global.ws.indexOf(ctx);
+        console.log('index:', index)
+        global.ws.splice(index, 1);
+        console.log('global.ws length:', global.ws.length)
     });
 });
 
