@@ -15,7 +15,7 @@ async function scheduleCronstyle() {
         var minwen = redisUtils.get(SMART_CONTRACT_MIN);
         var miwen = redisUtils.get(SMART_CONTRACT_HASH);
     	Promise.all([status, price, minwen, miwen]).then(result => {
-		    console.log(result);
+		    // console.log(result);
             if(!result || result.length<2) {
                 return;
             } 
