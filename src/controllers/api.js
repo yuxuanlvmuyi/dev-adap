@@ -1,5 +1,5 @@
 import { doBuy, status, gettransactioninfobyid, queryAssistantInfo, queryPrice, commitDeposit, commitHash,
-         roundLucky, doRefund, doLucky, queryRound, sendBonusAndFee, } from '../services/smartContract.js'
+         roundLucky, doRefund, doLucky, queryRound, sendBonusAndFee, queryTotalCoin,} from '../services/smartContract.js'
 const TronWeb = require('tronweb')
 var redis = require('redis')
 import {Redis} from '../config.js'
@@ -54,9 +54,8 @@ export async function Test (ctx) {
   // var res = await doLucky();
   // var res = await queryRound();
   // var res = await sendBonusAndFee('0x16');
-
-  var res = await dbUtils.getTodayBetList();
-  
+  // var res = await dbUtils.getTodayBetList();
+  var res = await queryTotalCoin();
   
   console.log("res:", res)
   // var res = await callback.then(function(re) {

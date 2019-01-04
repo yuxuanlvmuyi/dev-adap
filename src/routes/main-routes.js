@@ -13,8 +13,8 @@ router
   .put('/api/:name', controllers.api.Put)
   .del('/api/:name', controllers.api.Delect)
   .post('/auth/:action', controllers.auth.Post)
-  //.get('/testzhineng', controllers.api.Test)
-  .get('/testzhineng', controllers.smartContract.Test)
+  .get('/testzhineng', controllers.api.Test)
+  // .get('/testzhineng', controllers.smartContract.Test)
   .post('/smart/saveBetDetailInfo', controllers.smartContract.saveBetDetailInfo)
 
 module.exports = router

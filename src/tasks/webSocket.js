@@ -1,7 +1,7 @@
 const schedule = require('node-schedule');
 import redisUtils from '../tool/redis.js'
 import { RedisKeys } from '../config.js'
-const { SMART_CONTRACT_STATUS, SMART_CONTRACT_PRICE, SMART_CONTRACT_MIN, SMART_CONTRACT_HASH, } = RedisKeys
+const { SMART_CONTRACT_STATUS, SMART_CONTRACT_PRICE, SMART_CONTRACT_MIN, SMART_CONTRACT_HASH, SMART_CONTRACT_TOTALCOIN, } = RedisKeys
 
 async function scheduleCronstyle() {
 	var rule = new schedule.RecurrenceRule();
@@ -14,7 +14,8 @@ async function scheduleCronstyle() {
     	var price = redisUtils.get(SMART_CONTRACT_PRICE);
         var minwen = redisUtils.get(SMART_CONTRACT_MIN);
         var miwen = redisUtils.get(SMART_CONTRACT_HASH);
-    	Promise.all([status, price, minwen, miwen]).then(result => {
+        var totalCoin = redisUtils.get(SMART_CONTRACT_TOTALCOIN);
+    	Promise.all([status, price, minwen, miwen, totalCoin]).then(result => {
 		    // console.log(result);
             if(!result || result.length<2) {
                 return;
@@ -26,12 +27,14 @@ async function scheduleCronstyle() {
             if(global.canShowMinwen) {
                 miwenValue = result[3]
             }
+            var totalCoinValue = result[4]
             if(statusValue && priceValue) {
                 var obj = {
                     statusValue : statusValue,
                     priceValue : (parseInt(priceValue)/1000000),
                     minwenValue : minwenValue,
                     miwenValue : miwenValue,
+                    totalCoinValue : (parseInt(totalCoinValue)/1000000),
                 }
                 for(let i = 0; i < global.ws.length; i++) {
                     global.ws[i].websocket.send(JSON.stringify(obj));

@@ -196,7 +196,17 @@ export async function queryRound() {
   return res;
 }
 
-
+// 请求智能合约status方法
+export async function  queryTotalCoin () {
+  var res = await tronWeb.fullNode.request("wallet/triggersmartcontract", {
+      contract_address : smartContract.contractHexAddress,
+      owner_address: owner_address,
+      function_selector: 'totalCoin()',
+      fee_limit: parseInt(6000000)
+  }, "post");
+  // console.log('res res:', res)
+  return res;
+}
 
 
 

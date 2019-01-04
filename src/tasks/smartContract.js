@@ -1,10 +1,10 @@
 // 智能合约定时任务
 import { doBuy, queryStatus, gettransactioninfobyid, queryAssistantInfo, queryPrice, commitDeposit, commitHash,
-		 doLucky, roundLucky, doRefund, sendBonusAndFee, sendRefund, queryRound, } from '../services/smartContract.js'
+		 doLucky, roundLucky, doRefund, sendBonusAndFee, sendRefund, queryRound, queryTotalCoin, } from '../services/smartContract.js'
 import redisUtils from '../tool/redis.js'
 import { RedisKeys } from '../config.js'
 import { getByte32 } from '../tool/Common.js'
-const { SMART_CONTRACT_STATUS, SMART_CONTRACT_PRICE, SMART_CONTRACT_MIN, SMART_CONTRACT_ROUND, } = RedisKeys
+const { SMART_CONTRACT_STATUS, SMART_CONTRACT_PRICE, SMART_CONTRACT_MIN, SMART_CONTRACT_ROUND, SMART_CONTRACT_TOTALCOIN, SMART_CONTRACT_HASH, } = RedisKeys
 
 var executeTimes = 0;
 
@@ -106,9 +106,32 @@ async function mainTask(){
 				redisUtils.set(SMART_CONTRACT_PRICE, price);
 			}
 		})
+		// 购买了多少钱，用以前端显示进度条
+		var totalCoinRes = await queryTotalCoin()
+		if(!totalCoinRes) {
+			return;
+		}
+		var totalCoin = getConstantResult(totalCoinRes);
+		if(!totalCoin) {
+			return
+		}
+		totalCoin = parseInt(totalCoin,16); // 单位为sun
+		redisUtils.set(SMART_CONTRACT_TOTALCOIN, totalCoin);
 	} else if(statusValue == '3') {
 		executeTimes++; // 轮次
 		console.log('executeTimes executeTimes:', executeTimes)
+
+		var totalCoinRes = await queryTotalCoin()
+		if(!totalCoinRes) {
+			return;
+		}
+		var totalCoin = getConstantResult(totalCoinRes);
+		if(!totalCoin) {
+			return
+		}
+		totalCoin = parseInt(totalCoin,16); // 单位为sun
+		redisUtils.set(SMART_CONTRACT_TOTALCOIN, totalCoin);
+
 		// 开奖态：表示购买已经结束，即已经买满了
 		console.log(new Date())
 		await delay(50000);
@@ -169,6 +192,10 @@ async function mainTask(){
 			if(statusValue == '1') {
 				redisUtils.set(SMART_CONTRACT_STATUS, '5') // 后台定义的开奖失败状态
 				await delay(2000);
+				// 初始化
+				redisUtils.set(SMART_CONTRACT_TOTALCOIN, '0');
+				redisUtils.set(SMART_CONTRACT_MIN, '');
+				redisUtils.set(SMART_CONTRACT_HASH, '');
 			}
 		}
 	} else if(statusValue == '4') {

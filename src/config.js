@@ -37,16 +37,27 @@ export let SendEmail = {
 }
 
 export let smartContract = {
-  developerAddress : 'TTVVtovFaTpLBQ5fHfcDWN8hxzPjGpW3ef', // 开发者账户地址
-  developerPrivateKey : 'FB0836516A9B6E2502A971A8175CA9986BB755A68609086BE291C1969FDBB441', // 开发者私钥
-  assistantPrivateKey : 'FB0836516A9B6E2502A971A8175CA9986BB755A68609086BE291C1969FDBB441', // assistant私钥
-  fullNodeUrl : 'http://47.90.240.201:8090',
-  solidityNodeUrl : 'http://47.90.240.201:8091',
-  eventServerUrl : 'http://47.90.240.201:8092',
-  contractHexAddress : '412c68606d590aeebdb56b09bc3d55bf11672e53be',
-  contractBase58Address : 'TE21miaHFLdgXYaNF4dinLxKJFumQn2yvC',
-  assistantHexAddress : '412c68606d590aeebdb56b09bc3d55bf11672e53be',
-  assistantBase58Address : 'TE21miaHFLdgXYaNF4dinLxKJFumQn2yvC',
+  // developerAddress : 'TTVVtovFaTpLBQ5fHfcDWN8hxzPjGpW3ef', // 开发者账户地址
+  // developerPrivateKey : 'FB0836516A9B6E2502A971A8175CA9986BB755A68609086BE291C1969FDBB441', // 开发者私钥
+  // assistantPrivateKey : 'FB0836516A9B6E2502A971A8175CA9986BB755A68609086BE291C1969FDBB441', // assistant私钥
+  // fullNodeUrl : 'http://47.90.240.201:8090',
+  // solidityNodeUrl : 'http://47.90.240.201:8091',
+  // eventServerUrl : 'http://47.90.240.201:8092',
+  // contractHexAddress : '412c68606d590aeebdb56b09bc3d55bf11672e53be',
+  // contractBase58Address : 'TE21miaHFLdgXYaNF4dinLxKJFumQn2yvC',
+  // assistantHexAddress : '412c68606d590aeebdb56b09bc3d55bf11672e53be',
+  // assistantBase58Address : 'TE21miaHFLdgXYaNF4dinLxKJFumQn2yvC',
+
+  developerAddress : 'TRXz1kqRyZuADGY3DwYdfwj2qC7v9RWtjX', // 开发者账户地址
+  developerPrivateKey : '2162858F1651E51713D4CEBF5D148AC06C3516C35EAA4800C038B67BBEF3B399', // 开发者私钥
+  assistantPrivateKey : '2162858F1651E51713D4CEBF5D148AC06C3516C35EAA4800C038B67BBEF3B399', // assistant私钥
+  fullNodeUrl : 'https://api.trongrid.io',
+  solidityNodeUrl : 'https://api.trongrid.io',
+  eventServerUrl : 'https://api.trongrid.io',
+  contractHexAddress : '4105e6aaf4d054aaa5ef28031cc755e494a1847f11',
+  contractBase58Address : 'TAWQi6d2pVUe4Eucjti71MxW38kXvK691P',
+  assistantHexAddress : '41aabcc58cf7803333ddc0761cb86db6eed6bd5aa0',
+  assistantBase58Address : 'TRXz1kqRyZuADGY3DwYdfwj2qC7v9RWtjX',
 }
 
 export let isDev = true
@@ -59,6 +70,7 @@ export let RedisKeys = {
   'SMART_CONTRACT_HASH' : 'SMART_CONTRACT_HASH',   // 智能合约返回的商品价格
   'SMART_CONTRACT_MIN'  :  'SMART_CONTRACT_MIN',    // 要传给智能合约的明文
   'SMART_CONTRACT_ROUND' : 'SMART_CONTRACT_ROUND', // 轮次
+  'SMART_CONTRACT_TOTALCOIN' : 'SMART_CONTRACT_TOTALCOIN', //当前购买数
 }
 
 
