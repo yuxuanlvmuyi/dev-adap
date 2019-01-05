@@ -49,8 +49,8 @@ export let smartContract = {
   // assistantBase58Address : 'TE21miaHFLdgXYaNF4dinLxKJFumQn2yvC',
 
   developerAddress : 'TRXz1kqRyZuADGY3DwYdfwj2qC7v9RWtjX', // 开发者账户地址
-  developerPrivateKey : 'FB0836516A9B6E2502A971A8175CA9986BB755A68609086BE291C1969FDBB441', // 开发者私钥
-  assistantPrivateKey : 'FB0836516A9B6E2502A971A8175CA9986BB755A68609086BE291C1969FDBB441', // assistant私钥
+  developerPrivateKey : '2162858F1651E51713D4CEBF5D148AC06C3516C35EAA4800C038B67BBEF3B399', // 开发者私钥
+  assistantPrivateKey : '2162858F1651E51713D4CEBF5D148AC06C3516C35EAA4800C038B67BBEF3B399', // assistant私钥
   fullNodeUrl : 'https://api.trongrid.io',
   solidityNodeUrl : 'https://api.trongrid.io',
   eventServerUrl : 'https://api.trongrid.io',
