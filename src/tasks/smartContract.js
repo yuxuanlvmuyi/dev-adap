@@ -58,7 +58,7 @@ async function mainTask(){
 			// 如果保证金小于price，需要提价至少和价格相同的保证金
 			if(assistantMoney<price) {
 				console.log('commitDeposit price:', price)
-				var commitDepositRes = await commitDeposit(parseInt(price) * 2);
+				var commitDepositRes = await commitDeposit(parseInt(price));
 				console.log('commitDepositRes:', commitDepositRes)
 				if(commitDepositRes) {
 					var assistantMoney = getConstantResult(assistantRes);
