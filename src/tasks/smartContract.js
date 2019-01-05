@@ -159,11 +159,12 @@ async function mainTask(){
 			var sendBonusAndFeeRes = await sendBonusAndFee(round)
 			console.log('sendBonusAndFeeRes:', sendBonusAndFeeRes)
 			// 获取
-			var roundLuckyRes = await roundLucky(executeTimes)
+			var roundLuckyRes = await roundLucky(round)
 			console.log('roundLuckyRes:', roundLuckyRes)
 			if(!roundLuckyRes) {
 				return
 			}
+
 			await delay(2000);
 		} else if(statusValue == '3') {
 			// 开奖失败
@@ -232,6 +233,33 @@ function getConstantResult(res) {
 	if(!constantResult) {
 		return;
 	}
+	return constantResult;
+}
+
+// 得到交易结果数据
+function getBonusAddress(res) {
+	if(!res) {
+		return;
+	}
+	var resultObj = res.result;
+	if(!resultObj) {
+		return;
+	}
+	var result = resultObj.result
+	if(!(result && (result == true || result == 'true'))) {
+		return;
+	}
+
+	var constant_result = res['constant_result']
+	if(!constant_result || constant_result.length <= 0) {
+		return;
+	}
+	var constantResult = constant_result[0]
+	if(!constantResult) {
+		return;
+	}
+	var address = constantResult.substring(0， 64);
+	// TODD
 	return constantResult;
 }
 
